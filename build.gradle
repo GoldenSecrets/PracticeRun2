@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+    id 'kr.entree.spigradle' version '2.1.1'
+}
+
+dependencies {
+    compileOnly spigot() // <-- change this to the version you are coding for
+}
+
+group 'me.goldensecrets'
+version '0.0.1a'
+targetCompatibility = 1.8
+sourceCompatibility = 1.8
+
+compileJava.options.encoding 'UTF-8'
+
+spigot {
+    description 'A sample plugin'
+    commands {
+        give {
+            aliases 'giv', 'i'
+            description 'A give command.'
+            permission 'sample.give'
+            permissionMessage 'You do not have the permission.'
+        }
+    }
+    permissions {
+        'sample.give' {
+            description 'Allows give command'
+            defaults 'true'
+        }
+        'sample.*' {
+            description 'Wildcard permission'
+            defaults 'op'
+            children = ['test.foo': true]
+        }
+    }
+}
